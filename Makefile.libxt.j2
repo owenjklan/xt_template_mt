@@ -1,0 +1,3 @@
+CFLAGS=-O2 -Wall
+libxt_{{ name.lower() }}.so: libxt_{{ name.lower() }}.o
+	gcc -shared -o $@ $^;

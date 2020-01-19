@@ -1,0 +1,69 @@
+#include <stdio.h>
+
+#include <getopt.h>
+#include <xtables.h>
+#include "xt_{{ name.lower() }}.h"
+
+
+// static const struct option {{ name.lower() }}_mt_opts[] = {
+//     // {.name = "argname", .has_arg = true, .val = '1'},
+//     {},
+// };
+
+static void {{ name.lower() }}_mt_save(
+    const void *entry,
+    const struct xt_entry_match *match)
+{
+
+}
+
+static void {{ name.lower() }}_mt_print(
+    const void *ip,
+    const struct xt_entry_match *match,
+    int numeric)
+{
+    printf(" -m {{ name.lower() }}");
+    {{ name.lower() }}_mt_save(ip, match);
+}
+
+static void {{ name.lower() }}_mt_help(void)
+{
+
+}
+
+static int {{ name.lower() }}_mt_parse(
+    int c,
+    char **argv,
+    int invert,
+    unsigned int *flags,
+    const void *entry,
+    struct xt_entry_match **match)
+{
+    return false;
+}
+
+static void {{ name.lower() }}_mt_check(unsigned int flags)
+{
+
+}
+
+static struct xtables_match {{ name.lower() }}_mt_reg = {
+    .version        = XTABLES_VERSION,
+    .name           = "{{ name.lower() }}",
+    .revision       = 0,
+    .family         = NFPROTO_UNSPEC,
+    .size           = XT_ALIGN(sizeof(struct xt_{{ name.lower() }}_mtinfo)),
+    .userspacesize  = XT_ALIGN(sizeof(struct xt_{{ name.lower() }}_mtinfo)),
+    .help           = {{ name.lower() }}_mt_help,
+    .parse          = {{ name.lower() }}_mt_parse,
+    .final_check    = {{ name.lower() }}_mt_check,
+    .print          = {{ name.lower() }}_mt_print,
+    .save           = {{ name.lower() }}_mt_save,
+    // .extra_opts     = {{ name.lower() }}_mt_opts,
+};
+
+void _init(void);
+void _init(void)
+{
+    xtables_register_match(&{{ name.lower() }}_mt_reg);
+}
